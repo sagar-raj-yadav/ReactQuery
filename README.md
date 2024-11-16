@@ -19,8 +19,7 @@ Where it exists: LocalStorage, SessionStorage, or in-memory (e.g., React's useSt
 Speed: Access is fast since it's local.
 Use case: Temporary data that doesn't need to be shared with others.
 
-note:in-memory->"In-memory" ka matlab hai ki data sirf RAM (Random Access Memory) me store hota hai, aur jab tak app ya
-browser chal raha hai tab tak accessible hota hai. Agar page refresh karoge ya app band karoge, to yeh data delete ho jata hai.
+note:in-memory->"in-memory" ka matlab hai ki data sirf RAM me store hota hai, aur jab tak app ya browser chal raha hai tab tak accessible hota hai. Agar page refresh karoge ya app band karoge, to yeh data delete ho jata hai.
 (like redux,useState  ye sab in-memory data store karta h) .
 
 Server State:

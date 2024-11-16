@@ -1,0 +1,36 @@
+{
+    "posts":[
+    {
+      "id": 1,
+      "title": "Introduction to React Native",
+      "body": "React Native allows you to create native apps using JavaScript and React."
+    },
+    {
+      "id": 2,
+      "title": "Understanding Async Storage",
+      "body": "Async Storage is a simple, unencrypted, asynchronous key-value storage system for React Native."
+    },
+    {
+      "id": 3,
+      "title": "Exploring Node.js",
+      "body": "Node.js is a runtime environment for executing JavaScript code outside the browser."
+    },
+    {
+      "id": 4,
+      "title": "Guide to REST APIs",
+      "body": "REST APIs use HTTP requests to perform CRUD operations: Create, Read, Update, and Delete."
+    },
+    {
+      "id": 5,
+      "title": "Benefits of TypeScript",
+      "body": "TypeScript provides optional static typing, which improves developer productivity and code quality."
+    }
+  ],
+  "todos":[
+    {
+      "id":"1",
+      "title":"go to the doctor"
+    }
+  ]
+}
+  
