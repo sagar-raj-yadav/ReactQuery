@@ -51,3 +51,20 @@
 // export default App;
 
 
+import Home from './components/Home';
+import TradionalApiFetching from './components/TraditionalApiFetching';
+import FetchApiUsingReactQuery from './components/FetchApiUsingReactQuery';
+
+
+const App = () => {
+  return (
+    
+    <>
+    {/* <Home/> */}
+    {/* <TradionalApiFetching/> */}
+    <FetchApiUsingReactQuery/>
+    </>
+  )
+}
+
+export default App

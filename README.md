@@ -47,3 +47,38 @@ Example:User list, products, or notifications.
 | **Examples**     | Modal visibility, form inputs.           | User list, products, or notifications. |
 
 
+setup JSON server
+i.make db.json file and make api inside this file.
+ii.npm install json-server
+iii.inside package.json ,under scripts write    "serve-json": "json-server --watch db.json --port 4000"
+iv.In terminal write  " npm run serve-json  " , to open api
+
+
+1.useQuery Hook:-This hook is used to fetch and manage data  from an API  and caches it for efficient re-use.
+2.queryKey:-This is an array or string that uniquely identifies the query.
+        useQuery({
+         queryKey:["posts"]
+        });
+In this case, the queryKey is ["posts"].
+3.if we fetch the data from api/posts then query key is ["posts"]  and api/posts/1  then query key is  ["posts",1] or api/posts/2  then query key is  ["posts",2] .... use dynamic query key->["posts",post.id]
+
+note:->api/posts ->ye ek query hai and haar query ka ek alag query key hoga.
+note:->haar query ka ek uska apna queryKey hoga.
+4.Why queryKey is Important?
+=>Detect and reuse cached data instead of fetching it again.
+5.useQuery take 2 things ,i)querykey and ii)queryfunction (this is a  callback and this always returns a promise).
+
+6.useQuery return->
+const {
+  data,          // The fetched data
+  error,         // Error object, if any occurred during fetching
+  isLoading,     // `true` while the query is loading for the first time
+  isError,       // `true` if the query encountered an error
+  isSuccess,     // `true` if the query was successful
+  isFetching,    // `true` when the query is fetching data (includes background fetching)
+  refetch,       // A function to manually trigger a refetch
+  status,        // Current query status: 'idle' | 'loading' | 'error' | 'success'
+  dataUpdatedAt, // Timestamp of the last time the data was updated
+  errorUpdatedAt,// Timestamp of the last time the error was updated
+  isStale,       // `true` if the cached data is stale
+} = useQuery({ queryKey, queryFn });
