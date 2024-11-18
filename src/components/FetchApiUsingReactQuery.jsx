@@ -12,7 +12,6 @@ const FetchApiUsingReactQuery = () => {
     
   });
 
-  // const {data,error,isError,isLoading}=result;
 
   
   if (isError) {
@@ -25,7 +24,7 @@ const FetchApiUsingReactQuery = () => {
 
 
   console.log(data); 
-  
+
   //  output->ek object and object ke andar data hai and uss data ke andar
   //   pura posts ka data hai.. isliye humne data.data likhe h niche
 
@@ -34,7 +33,7 @@ const FetchApiUsingReactQuery = () => {
     <div>
     <h1>Posts</h1>
     <ul>
-      {data.data.map((post) => (
+      {data?.data?.map((post) => (
         <li key={post.id}>
           <p>{post.title}</p>
           <p>{post.body}</p>

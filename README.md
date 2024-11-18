@@ -82,3 +82,33 @@ const {
   errorUpdatedAt,// Timestamp of the last time the error was updated
   isStale,       // `true` if the cached data is stale
 } = useQuery({ queryKey, queryFn });
+
+
+INSTALL react-query dev tools:-
+ npm install @tanstack/react-query-devtools ->install karne ke baad niche me devtools show ho jayega.
+
+
+ QUERY CACHE -> iska kaam hai ki fetched data ko temporarily store karna.
+Iska main purpose hai ki agar tum ek hi data baar-baar fetch karte ho, toh server se baar-baar request na jaye, aur tumhare app ka performance better ho.
+
+Note: agar hum query cache use nhi kar rhe hai to , humara frontned se api call hoga and haar baar server jo hai wo database ko call karega data lene ke liye.(haar baar webiste reload hoga to loading... show hoga,because haar baar api se database pe request  jaa rha h.)
+
+Simple Example:-
+Imagine karo tum ek library jaate ho aur kisi book ka reference chahiye:
+Without Cache: Har baar librarian ke paas jaoge aur wahi book mangoge. Har baar time lagega.
+With Cache: Pehli baar book leke apne table par rakh lo. Ab jab zarurat ho, seedha table se utha lo — time save ho gaya.
+
+##React Query Me Cache Kaise Kaam Karta Hai?
+i.First Fetch:
+Jab tum data fetch karte ho (useQuery ke through), React Query us data ko apne cache me store kar leta hai.
+Example: Tumne posts ka data fetch kiya.
+ii.Reusing Cached Data:
+Agar tum dobara queryKey: ["posts"] ke saath data fetch karte ho, React Query directly cache se data de deta hai. Server ko request bhejne ki zarurat nahi padti.
+iii.Stale Time:
+Cache me rakha data kitne time tak fresh maana jayega, ye tum define kar sakte ho.
+Default: 0 seconds (React Query maan leta hai ki data turant stale ho gaya).
+iv.Automatic Refetch:
+Agar data stale ho gaya hai (time expire ho gaya), React Query background me server se naya data fetch kar lega, bina UI ko block kiye.
+
+
+very important concept::->
