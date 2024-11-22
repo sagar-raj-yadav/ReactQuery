@@ -111,4 +111,4 @@ iv.Automatic Refetch:
 Agar data stale ho gaya hai (time expire ho gaya), React Query background me server se naya data fetch kar lega, bina UI ko block kiye.
 
 
-very important concept::->
+very important concept::->please read it carefully
