@@ -4,12 +4,15 @@ import axios from 'axios';
 
 const FetchApiUsingReactQuery = () => {
 
-  const { data, error, isError, isLoading } = useQuery({
+  const { data, error, isError, isLoading,refetch } = useQuery({
     queryKey:["posts"],
     queryFn:()=>{
       return axios.get("http://localhost:4000/posts");
-    }
-    
+    },
+    // staleTime:10000,     //10 second
+    // refetchInterval:1000,
+    // refetchIntervalInBackground:true
+    // enabled:false
   });
 
 
@@ -32,6 +35,7 @@ const FetchApiUsingReactQuery = () => {
   return (
     <div>
     <h1>Posts</h1>
+    {/* <button onClick={refetch}>Fetch Posts</button> */}
     <ul>
       {data?.data?.map((post) => (
         <li key={post.id}>

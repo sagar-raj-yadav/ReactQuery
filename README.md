@@ -47,7 +47,7 @@ Example:User list, products, or notifications.
 | **Examples**     | Modal visibility, form inputs.           | User list, products, or notifications. |
 
 
-setup JSON server
+# setup JSON server
 i.make db.json file and make api inside this file.
 ii.npm install json-server
 iii.inside package.json ,under scripts write    "serve-json": "json-server --watch db.json --port 4000"
@@ -66,6 +66,7 @@ note:->api/posts ->ye ek query hai and haar query ka ek alag query key hoga.
 note:->haar query ka ek uska apna queryKey hoga.
 4.Why queryKey is Important?
 =>Detect and reuse cached data instead of fetching it again.
+
 5.useQuery take 2 things ,i)querykey and ii)queryfunction (this is a  callback and this always returns a promise).
 
 6.useQuery return->
@@ -88,7 +89,7 @@ INSTALL react-query dev tools:-
  npm install @tanstack/react-query-devtools ->install karne ke baad niche me devtools show ho jayega.
 
 
- QUERY CACHE -> iska kaam hai ki fetched data ko temporarily store karna.
+# QUERY CACHE -> iska kaam hai ki fetched data ko temporarily store karna.
 Iska main purpose hai ki agar tum ek hi data baar-baar fetch karte ho, toh server se baar-baar request na jaye, aur tumhare app ka performance better ho.
 
 Note: agar hum query cache use nhi kar rhe hai to , humara frontned se api call hoga and haar baar server jo hai wo database ko call karega data lene ke liye.(haar baar webiste reload hoga to loading... show hoga,because haar baar api se database pe request  jaa rha h.)
@@ -98,9 +99,21 @@ Imagine karo tum ek library jaate ho aur kisi book ka reference chahiye:
 Without Cache: Har baar librarian ke paas jaoge aur wahi book mangoge. Har baar time lagega.
 With Cache: Pehli baar book leke apne table par rakh lo. Ab jab zarurat ho, seedha table se utha lo — time save ho gaya.
 
-##React Query Me Cache Kaise Kaam Karta Hai?
+## React Query Me Cache Kaise Kaam Karta Hai?
 i.First Fetch:
-Jab tum data fetch karte ho (useQuery ke through), React Query us data ko apne cache me store kar leta hai.
+Jab tum data fetch karte ho (useQuery ke through), React Query us data ko apne cache me store kar leta hai. (cache in-memory hota hai, jo browser ke memory me store hota hai.)
+
+# note start:
+React Query ka cache in-memory hota hai, jo browser ke memory me store hota hai. Matlab, jab tum useQuery ke through data fetch karte ho, to React Query us data ko client ke memory me (browser ke RAM me) store kar leta hai.
+React Query ka cache default settings ke saath, data ko tab tak store karta hai jab tak cache ka time-to-live (TTL) expire nahi hota. Yeh TTL ka duration tum customize kar sakte ho, jisme tum decide kar sakte ho ki data ko kitni der tak cache me store karna hai. Agar data ka TTL expire ho jata hai, to React Query dobara se server se data fetch karega.
+
+React Query ka cache tumhare browser ke localStorage ya sessionStorage me bhi store nahi hota, jab tak ki tum explicitly isse store karne ke liye configuration na kar do. Bas ye RAM me hota hai aur tumhare browser session ke end tak available rahta hai.
+
+Tum React Query ka cache manually bhi manage kar sakte ho, jaise:
+Invalidate karna (useQueryClient ke through), jab tum chahte ho ki data ko refresh kiya jaye.
+Refetch karna, agar tumhe fresh data ki zarurat ho.
+# note end:
+
 Example: Tumne posts ka data fetch kiya.
 ii.Reusing Cached Data:
 Agar tum dobara queryKey: ["posts"] ke saath data fetch karte ho, React Query directly cache se data de deta hai. Server ko request bhejne ki zarurat nahi padti.
@@ -111,4 +124,31 @@ iv.Automatic Refetch:
 Agar data stale ho gaya hai (time expire ho gaya), React Query background me server se naya data fetch kar lega, bina UI ko block kiye.
 
 
-very important concept::->please read it carefully
+# stale time
+kitna der me mujhe new request send karna h.
+by default 0 second hota h(i.e, turant request refecth hoga)
+
+    staleTime:10000  (time in millisecond)   ->agar 10 second ke andar ussi api ko kitna baar bhi call kar le ,new request nhi bhejenge ,,10 second ke baad automatically new request bhej denge
+
+# polling 
+Polling ek technique hai jisme ek client (jaise browser ya application) baar-baar ek server se data fetch karta hai, taaki naya ya updated data mil sake. Ye technique tab useful hoti hai jab real-time updates chahiye hote hain, lekin server ke paas koi dedicated "push" mechanism nahi hota (e.g., WebSockets).
+
+Polling ka Concept
+i. Client Repeatedly Requests: Client ek fixed interval par server ko request bhejta hai.
+ii. Server Responds: Server updated ya latest data return karta hai.
+iii. Client Updates UI: Client received data ko apne UI me dikhata hai.
+
+ex: Trading appication(groww)..
+
+=>    refetchInterval:1000  //haar 1 second ke baad api call hoga . 
+
+note:i. agar hum new tab me switch ho jayega to polling stop ho jayega and fir se tab hi continue hoga ja tm ussi tab me wapas aayoge.
+ ii. agar background me bhi data fetch kare(i.e, tab change kiye hai fir bhi api cal hona chahiye ) ,iske liye hum  refetchIntervalInBackground:true  ,ye karna hoga 
+ 
+# useQuery click
+enabled:false->starting me API call nhi hoga aur koi data fetch nhi hoga, 
+  const { refetch } = useQuery({})  ->refetch karna hoga
+  <button onClick={refetch}>Fetch Posts</button>
+jab user iss button pe click karega to API call hoga and data fetch hoga
+
+# Query By Id
