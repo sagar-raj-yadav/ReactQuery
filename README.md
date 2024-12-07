@@ -152,3 +152,4 @@ enabled:false->starting me API call nhi hoga aur koi data fetch nhi hoga,
 jab user iss button pe click karega to API call hoga and data fetch hoga
 
 # Query By Id
+koi bhi post ko uske id se access karna h (like -> post/1)

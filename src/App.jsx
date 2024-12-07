@@ -54,16 +54,21 @@
 import Home from './components/Home';
 import TradionalApiFetching from './components/TraditionalApiFetching';
 import FetchApiUsingReactQuery from './components/FetchApiUsingReactQuery';
-
+import PostDetails from './components/PostDetails'
+import Navbar from './components/NavBar';
+import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
   return (
     
-    <>
-    {/* <Home/> */}
-    {/* <TradionalApiFetching/> */}
-    <FetchApiUsingReactQuery/>
-    </>
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<p>home</p>} />
+        <Route path="/post" element={<FetchApiUsingReactQuery />} />
+        <Route path="/post/:postid" element={<PostDetails />} />
+      </Routes>
+    </div>
   )
 }
 

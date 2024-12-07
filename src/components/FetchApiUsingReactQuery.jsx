@@ -1,14 +1,16 @@
 import React from 'react'
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const FetchApiUsingReactQuery = () => {
 
   const { data, error, isError, isLoading,refetch } = useQuery({
     queryKey:["posts"],
     queryFn:()=>{
-      return axios.get("http://localhost:4000/posts");
-    },
+     return axios.get("https://jsonplaceholder.typicode.com/posts")
+    }
+
     // staleTime:10000,     //10 second
     // refetchInterval:1000,
     // refetchIntervalInBackground:true
@@ -18,7 +20,7 @@ const FetchApiUsingReactQuery = () => {
 
   
   if (isError) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error?.message || "An unknown error occurred"}</div>;
   }
 
   if (isLoading) {
@@ -38,10 +40,12 @@ const FetchApiUsingReactQuery = () => {
     {/* <button onClick={refetch}>Fetch Posts</button> */}
     <ul>
       {data?.data?.map((post) => (
-        <li key={post.id}>
+        <Link   key={post.id} to={`/post/${post.id}`}>
+        <li>
           <p>{post.title}</p>
           <p>{post.body}</p>
         </li>
+        </Link>
       ))}
     </ul>
   </div>
